@@ -1,0 +1,165 @@
+html,body{
+	margin: 0;
+	text-align: center;
+
+
+}
+
+#top {
+	width: 100%;
+	height: 100px;
+	background-color: #fffc00;
+	align-content: center;
+	text-align: center;
+	color: #010101;
+	font-size: 200%;
+}
+
+#reg {
+	height: 100%;
+	width: 100%;
+	font-family: 微软雅黑;
+	align-content: center;
+	opacity: 0.8;
+}
+
+form {
+	width: 100%;
+	align-content: center;
+	padding-left: 30px;
+	margin-top: 25px;
+}
+
+input {
+	width: 30%;
+	padding: 6px 10px;
+	margin: 10px 20px;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+	font-size: 120%;
+}
+
+input:focus {
+	border: 3px solid #555;
+}
+
+#sub{
+	width: 100px;
+	height: 100px;
+	border-radius:50%;
+	background-color: rgb(71,84,160);
+	box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.4);
+	margin-top: 30px;
+	margin-bottom: 30px;
+	color: white;
+	font-size: 120%;
+}
+
+#sub:active{
+	transform: scale(0.98);
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+.tasklist {
+	margin-top: 50px;
+	margin-left: 50px;
+	width: 70%;
+	height: 500px;
+	background-color: #dfdfdf;
+	overflow-y: scroll;
+	opacity: 0.7
+}
+
+#task {
+	background-color: #4398f0;
+	width: 90%;
+	height: 70px;
+	margin-left: 30px;
+	border-style: solid;
+	border-width: 5px;
+	border-color: rgb(66,66,66);
+	border-radius: 10px;
+}
+
+#name {
+	position: relative;
+	top: 20px;
+	left: -50px;
+	width: 50%;
+	font-size: 150%;
+	font-family: 微软雅黑;
+
+}
+
+#time {
+	position: relative;
+	bottom: 11px;
+	left: 50px;
+}
+
+#time:before {
+	position: relative;
+  	content: "|";
+  	float: left;
+  	color: black;
+  	left: 300px;
+}
+
+#add {
+	width: 60px;
+	height: 50px;
+	border-style: solid;
+	border-width: 3px;
+	border-color: rgb(66,66,66);
+	border-radius: 50%;
+	background-color: rgb(250,150,2);
+	position: relative;
+	top: 10px;
+	box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.4);
+}
+
+#add:active{
+	transform: scale(0.98);
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+label {
+	font-size: 50%;
+	position: relative;
+	top: 20px;
+}
+
+input {
+	position: relative;
+	top: 25px;
+	width: 150px;
+	height: 30px;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	outline: none;
+	font-size: 50%;
+}
+
+input:focus {
+	border: 3px solid #555;
+}
+
+.delete {
+	position: relative;
+	bottom: 60px;
+	left: 400px;
+	width: 60px;
+	height: 60px;
+	background-color: pink;
+	border-radius: 50%;
+	font-size: 100%;
+	box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.4);
+}
+
+.delete:active{
+	transform: scale(0.98);
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}

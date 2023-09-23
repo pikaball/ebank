@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>登录-网银</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+	<script src="{% static 'js/jquery.js' %}"></script>
+</head>
+<body style="margin:0">
+
+	<div id="login">
+		<img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
+		<br>
+		<form>
+			<label for="username">用户名</label><br>
+			<input id="user" type="text" name="username"><br>
+			<label for="password">密码</label><br>
+			<input id="pwd" type="password" name="password"><br>
+		</form>
+		<button id="sub" onclick="postlogin()">Login</button>
+		<a href="http://localhost:8888/reg">注册</a>
+	</div>
+
+	<div class="picwall" id="pic1">
+        <div>
+            <canvas id='cas' width="1200" height="800" style="background-color:#262929">您那破烂浏览器不支持 Canvas，换个现代浏览器吧。</canvas>
+        </div>
+        <div style="display:none">
+            <div class="ele">  欢迎登录网上银行</div>
+            <div class="ele">  我们提供：</div>
+            <div class="ele">  便捷的支付</div>
+            <div class="ele">  完善的安全性</div>
+            <div class="ele">  以及炫酷的界面</div>
+        </div>
+        <script src="{% static 'js/runma.js' %}"></script>
+    </div>
+</body>
+</html>
