@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}网银系统{% endblock %}</title>
+    <script src="{% static 'js/jquery.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.js"></script>
+    <style>
+        .full.height {
+            display: flex;
+            flex-direction: row;
+        }
+        .full.height > .toc {
+            position: fixed;
+            z-index: 1;
+            background-color: #1b1c1d;
+            width: 300px;
+            height: 100%;
+            flex: 0 0 auto;
+        }
+        .article {
+            flex: 1 1 auto;
+            min-width: 0;
+            margin-left: 360px;
+            margin-top: 50px;
+        }
+    </style>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <div class="full height">
+    <div class="toc">
+        <div class="ui big vertical inverted menu">
+            <div class="item">
+                <a class="ui logo icon image" href="/">
+                  <img src="{% static 'img/logo.png' %}">
+                </a>
+                <a href="/"><b>Caster Bank</b></a>
+              </div>
+            <div class="item"><a href="/">主页</a></div>
+            <div class="item"><a href="/">修改信息</a></div>
+            <div class="item"><a href="/record">交易记录</a></div>
+            <div class="item"><a href="/">转账</a></div>
+            <div class="item"><a href="/login">返回登录</a></div>
+        </div>
+    </div>
+    <div class="article">
+        {% block content %}{% endblock %}
+    </div>
+    </div>
+</body>
+</html>

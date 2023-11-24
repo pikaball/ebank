@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网银系统</title>
-</head>
-<body>
-    <center>
-        <h2>Account:{{ username }}</h2>
-        <h2>Token:{{ token }}</h2>
-    </center>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block style %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="ui massive card">
+    <div class="content">账户余额</div>
+    <div class="content">{{balance}}</div>
+</div>
+<div class="ui large card">
+    <div class="content">基本信息</div>
+    <div class="content">姓名：{{pname}}</div>
+    <div class="content">证件号：{{pid}}</div>
+    <div class="content">生日：{{pbirth}}</div>
+    <div class="content">性别：{{psex}}</div>
+    <div class="content">国籍：{{pcountry}}</div>
+    <div class="content">电话：{{tel}}</div>
+    <div class="content">注册时间：{{regtime}}</div>
+</div>
+{% endblock %}

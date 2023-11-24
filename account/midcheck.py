@@ -27,7 +27,6 @@ class TokenMiddleware:
         coo = Cookie.objects.filter(cookie=token)
         if not len(coo):
             return False
-        aid = coo.values()[0]['uid']
         live = float(coo.values()[0]['live'])
         if time.time() > live:
             return False

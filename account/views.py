@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from account.models import Account,Cookie
+from account.models import *
 from django.http import *
 from hashlib import sha256
 import secrets
@@ -7,14 +7,8 @@ import time
 
 # Create your views here.
 def home(requests):
-    context = {
-        'username' : 'test',
-        'token' : None
-    }
-    try:
-        context['token'] = requests.COOKIES['token']
-    except:
-        pass
+    token = requests.COOKIES['token']
+    context = getinfo(token)
     return render(requests,'home.html',context)
 
 def login(requests):
@@ -40,3 +34,51 @@ def login(requests):
         print(context)
         return render(requests, 'login.html', context)
     return render(requests, 'login.html',{'message':'test'})
+
+def getinfo(token):
+    coo = Cookie.objects.filter(cookie=token)
+    aid = coo.values()[0]['uid']
+    user = Account.objects.filter(aid=aid)
+    info = user.values()[0]
+    del info['logpwdhash']
+    if info['psex']=='m':
+        info['psex']='男'
+    else:
+        info['psex']='女'
+    info['balance']=f"{info['balance']:.2f}"
+    return info
+
+def getname(aid):
+    user = Account.objects.filter(aid=aid)
+    if not len(user):
+        return None
+    return user.values()[0]['pname']
+
+def record(requests):
+    token = requests.COOKIES['token']
+    aid = getinfo(token)['aid']
+    rec0 = Record.objects.filter(orig_id=aid).values()
+    rec1 = Record.objects.filter(recv_id=aid).values()
+    orig_li = []
+    for item in rec0:
+        rec = {
+            'orig':getname(item['orig_id']),
+            'recv':getname(item['recv_id']),
+            'money':f"{item['money']:.2f}",
+            'time':item['time']
+        }
+        orig_li.append(rec)
+    recv_li = []
+    for item in rec1:
+        rec = {
+            'orig':getname(item['orig_id']),
+            'recv':getname(item['recv_id']),
+            'money':f"{item['money']:.2f}",
+            'time':item['time']
+        }
+        recv_li.append(rec)
+    context = {
+        'orig':orig_li,
+        'recv':recv_li
+    }
+    return render(requests,"record.html",context)

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block style %}
+<style>
+    .ui.large.card {
+        width: 80%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="ui centered cards">
+    <div class="ui large card">
+        <div class="content">转出记录</div>
+        {% for rec in orig %}
+            <div class="content">
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>发起方</th>
+                            <th>接收方</th>
+                            <th>交易金额</th>
+                            <th>交易时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{{rec.orig}}</th>
+                            <th>{{rec.recv}}</th>
+                            <th>{{rec.money}}</th>
+                            <th>{{rec.time}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="ui large card">
+        <div class="content">转入记录</div>
+        {% for rec in recv %}
+            <div class="content">
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>发起方</th>
+                            <th>接收方</th>
+                            <th>交易金额</th>
+                            <th>交易时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{{rec.orig}}</th>
+                            <th>{{rec.recv}}</th>
+                            <th>{{rec.money}}</th>
+                            <th>{{rec.time}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

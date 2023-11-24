@@ -9,7 +9,7 @@ class Account(models.Model):
     pbirth = models.DateField()
     psex = models.CharField(max_length=1)
     pcountry = models.CharField(max_length=20)
-    balance = models.IntegerField()
+    balance = models.FloatField()
     regtime = models.DateTimeField()
     cert = models.CharField(max_length=50)
     logpwdhash = models.CharField(max_length=32) # sha256
@@ -21,7 +21,7 @@ class Record(models.Model):
     rid = models.CharField(max_length=20,primary_key=True)
     orig_id = models.CharField(max_length=20)
     recv_id = models.CharField(max_length=20)
-    money = models.IntegerField()
+    money = models.FloatField()
     time = models.DateTimeField()
 
     def __str__(self):
