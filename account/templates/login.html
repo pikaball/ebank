@@ -7,34 +7,86 @@
 	<title>登录-网银</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
 	<script src="{% static 'js/jquery.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.js"></script>
+	<style type="text/css">
+		body {
+		  background-color: #DADADA;
+		}
+		body > .grid {
+		  height: 100%;
+		}
+		.image {
+		  margin-top: -100px;
+		}
+		.column {
+		  max-width: 450px;
+		}
+	  </style>
 </head>
-<body style="margin:0">
-
-	<div id="login">
+<body>
+	<div class="column">
 		<img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
-		<br>
-		<form>
-			<label for="username">用户名</label><br>
-			<input id="user" type="text" name="username"><br>
-			<label for="password">密码</label><br>
-			<input id="pwd" type="password" name="password"><br>
-		</form>
-		<button id="sub" onclick="postlogin()">Login</button>
-		<a href="http://localhost:8888/reg">注册</a>
-	</div>
+	<form class="ui large form">
+		<div class="ui stacked segment">
+		  <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="tel" type="text" name="tel" placeholder="Your Tel Number">
+			</div>
+		  </div>
+		  <div class="field">
+			<div class="ui left icon input">
+			  <i class="lock icon"></i>
+			  <input id="pwd" type="password" name="pwd" placeholder="Password">
+			</div>
+		  </div>
+		  <div class="ui fluid large teal submit button" onclick="postlogin()">Login</div>
+		</div>
+  
+		
+  
+	  </form>
+	  <div class="ui error message">
+		{% if fall %}
+			{{message}}
+		{% endif %}
+	</div></div>
 
-	<div class="picwall" id="pic1">
-        <div>
-            <canvas id='cas' width="1200" height="800" style="background-color:#262929">您那破烂浏览器不支持 Canvas，换个现代浏览器吧。</canvas>
-        </div>
-        <div style="display:none">
-            <div class="ele">  欢迎登录网上银行</div>
-            <div class="ele">  我们提供：</div>
-            <div class="ele">  便捷的支付</div>
-            <div class="ele">  完善的安全性</div>
-            <div class="ele">  以及炫酷的界面</div>
-        </div>
-        <script src="{% static 'js/runma.js' %}"></script>
-    </div>
+	
+
 </body>
 </html>
+<script>
+	function postlogin()
+	{
+		function getCookie(cookieName) {
+    	var name = cookieName + "=";
+    	var decodedCookie = decodeURIComponent(document.cookie);
+    	var cookieArray = decodedCookie.split(';');
+
+    	for(var i = 0; i < cookieArray.length; i++) {
+        	var cookie = cookieArray[i].trim();
+        	if (cookie.indexOf(name) === 0) {
+            	return cookie.substring(name.length, cookie.length);
+        	}
+    	}
+    	return null;
+		}
+		const csrftoken = getCookie('csrftoken');
+		var tel = $('#tel').val();
+        var pwd = $('#pwd').val();
+        $.ajax({
+            url: '/login/',
+            type: 'POST',
+			headers: {
+				'X-CSRFToken': csrftoken
+			},
+            data: {
+                'tel': tel,
+                'pwd': pwd
+            },
+			success: (ret) => {if (ret=='success') window.location='/';else $('html').html(ret);}
+		})
+	}
+</script>

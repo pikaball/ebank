@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "account.midcheck.TokenMiddleware"
 ]
 
 ROOT_URLCONF = "ebank.urls"
@@ -106,6 +107,8 @@ TIME_ZONE = "Asia/Shanghai"
 USE_I18N = True
 
 USE_TZ = True
+
+APPEND_SLASH = True
 
 
 # Static files (CSS, JavaScript, Images)
