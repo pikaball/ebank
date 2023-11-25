@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>登录-网银</title>
+	<title>注册-网银</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
 	<script src="{% static 'js/jquery.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
@@ -32,35 +32,67 @@
 </head>
 <body>
 	<div class="column">
-		<img src="{% static 'img/logo.png' %}" alt="logo" class="logo">
 	<form class="ui large form">
 		<div class="ui stacked segment">
 		  <div class="field">
 			<div class="ui left icon input">
 			  <i class="user icon"></i>
-			  <input id="tel" type="text" name="tel" placeholder="Your Tel Number">
+			  <input id="aid" type="text" name="aid" placeholder="卡号">
+			</div>
+		  </div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="pname" type="text" name="pname" placeholder="姓名">
+			</div>
+		  </div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="pid" type="text" name="pid" placeholder="证件号">
+			</div>
+		  </div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="pbirth" type="date" name="pbirth" placeholder="生日">
+			</div>
+		  </div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="psex" type="text" name="psex" placeholder="性别">
+			</div>
+		  </div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="user icon"></i>
+			  <input id="tel" type="text" name="tel" placeholder="手机号">
 			</div>
 		  </div>
 		  <div class="field">
 			<div class="ui left icon input">
 			  <i class="lock icon"></i>
-			  <input id="pwd" type="password" name="pwd" placeholder="Password">
+			  <input id="pwd" type="password" name="pwd" placeholder="密码">
 			</div>
 		  </div>
-		  <div class="ui fluid large teal submit button" onclick="postlogin()">Login</div>
+          <div class="field">
+			<div class="ui left icon input">
+			  <i class="lock icon"></i>
+			  <input id="pwd-check" type="password" name="pwd-check" placeholder="确认密码">
+			</div>
+		  </div>
+		  <div class="ui fluid large teal submit button" onclick="postlogin()">注册</div>
 		</div>
   
 		
   
 	  </form>
-	  <div class="ui error message" width="420px">
+	  <div class="ui error message">
 		{% if fall %}
 			{{message}}
 		{% endif %}
-	</div>
-	<span>&nbsp;</span>
-	<button class="ui primary button" onclick="window.location.href='/register'">注册</button>
-	</div>
+	</div></div>
 
 	
 
@@ -86,7 +118,7 @@
 		var tel = $('#tel').val();
         var pwd = $('#pwd').val();
         $.ajax({
-            url: '/login/',
+            url: '/register/',
             type: 'POST',
 			headers: {
 				'X-CSRFToken': csrftoken

@@ -37,8 +37,7 @@ input:focus {
 
 .logo {
 	width: 40%;
-	margin-top: 50px;
-	margin-left: 160px;
+
 	animation: rotation 5s linear infinite;
 }
 

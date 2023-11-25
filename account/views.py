@@ -35,6 +35,9 @@ def login(requests):
         return render(requests, 'login.html', context)
     return render(requests, 'login.html',{'message':'test'})
 
+def register(requests):
+    return render(requests, 'reg.html',{'message':'test'})
+
 def getinfo(token):
     coo = Cookie.objects.filter(cookie=token)
     aid = coo.values()[0]['uid']
@@ -82,3 +85,6 @@ def record(requests):
         'recv':recv_li
     }
     return render(requests,"record.html",context)
+
+def trans(requests):
+    return render(requests, "trans.html")

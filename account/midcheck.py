@@ -10,7 +10,8 @@ class TokenMiddleware:
         self.get_response = get_response
 
     def __call__(self, requests):
-        if requests.path == "/login/":
+        nocookie=["/login/","/api/trans/","/register/"]
+        if requests.path in nocookie:
             return self.get_response(requests)
         try:
             token = requests.COOKIES['token']

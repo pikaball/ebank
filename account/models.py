@@ -8,10 +8,8 @@ class Account(models.Model):
     tel = models.CharField(max_length=20, null=True)
     pbirth = models.DateField()
     psex = models.CharField(max_length=1)
-    pcountry = models.CharField(max_length=20)
     balance = models.FloatField()
     regtime = models.DateTimeField()
-    cert = models.CharField(max_length=50)
     logpwdhash = models.CharField(max_length=32) # sha256
 
     def __str__(self):
