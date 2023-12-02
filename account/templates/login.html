@@ -9,6 +9,7 @@
 	<script src="{% static 'js/jquery.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
 	<style type="text/css">
 		body {
 		  background-color: #ffffff;
@@ -27,6 +28,7 @@
 		  bottom: 0;
 		  left:0;
 		  right: 0;
+		  text-align: center;
 		}
 	  </style>
 </head>
@@ -54,9 +56,6 @@
   
 	  </form>
 	  <div class="ui error message" width="420px">
-		{% if fall %}
-			{{message}}
-		{% endif %}
 	</div>
 	<span>&nbsp;</span>
 	<button class="ui primary button" onclick="window.location.href='/register'">注册</button>
@@ -95,7 +94,7 @@
                 'tel': tel,
                 'pwd': pwd
             },
-			success: (ret) => {if (ret=='success') window.location='/';else $('html').html(ret);}
+			success: (ret) => {if (ret=='success') window.location='/';else $('.ui.error.message').html(ret);}
 		})
 	}
 </script>

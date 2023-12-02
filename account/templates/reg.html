@@ -49,7 +49,7 @@
           <div class="field">
 			<div class="ui left icon input">
 			  <i class="user icon"></i>
-			  <input id="pid" type="text" name="pid" placeholder="证件号">
+			  <input id="pid" type="text" name="pid" placeholder="18位证件号">
 			</div>
 		  </div>
           <div class="field">
@@ -61,19 +61,19 @@
           <div class="field">
 			<div class="ui left icon input">
 			  <i class="user icon"></i>
-			  <input id="psex" type="text" name="psex" placeholder="性别">
+			  <input id="psex" type="text" name="psex" placeholder="性别(M/F)">
 			</div>
 		  </div>
           <div class="field">
 			<div class="ui left icon input">
 			  <i class="user icon"></i>
-			  <input id="tel" type="text" name="tel" placeholder="手机号">
+			  <input id="tel" type="text" name="tel" placeholder="11位手机号">
 			</div>
 		  </div>
 		  <div class="field">
 			<div class="ui left icon input">
 			  <i class="lock icon"></i>
-			  <input id="pwd" type="password" name="pwd" placeholder="密码">
+			  <input id="pwd" type="password" name="pwd" placeholder="密码，长度小于20">
 			</div>
 		  </div>
           <div class="field">
@@ -82,7 +82,7 @@
 			  <input id="pwd-check" type="password" name="pwd-check" placeholder="确认密码">
 			</div>
 		  </div>
-		  <div class="ui fluid large teal submit button" onclick="postlogin()">注册</div>
+		  <div class="ui fluid large teal submit button" onclick="postreg()">注册</div>
 		</div>
   
 		
@@ -99,35 +99,73 @@
 </body>
 </html>
 <script>
-	function postlogin()
-	{
-		function getCookie(cookieName) {
-    	var name = cookieName + "=";
-    	var decodedCookie = decodeURIComponent(document.cookie);
-    	var cookieArray = decodedCookie.split(';');
+	function postreg() {
+    var aid = $('#aid').val();
+    var pname = $('#pname').val();
+    var pid = $('#pid').val();
+    var pbirth = $('#pbirth').val();
+    var psex = $('#psex').val();
+    var tel = $('#tel').val();
+    var pwd = $('#pwd').val();
+    var pwdCheck = $('#pwd-check').val();
 
-    	for(var i = 0; i < cookieArray.length; i++) {
-        	var cookie = cookieArray[i].trim();
-        	if (cookie.indexOf(name) === 0) {
-            	return cookie.substring(name.length, cookie.length);
-        	}
-    	}
-    	return null;
-		}
-		const csrftoken = getCookie('csrftoken');
-		var tel = $('#tel').val();
-        var pwd = $('#pwd').val();
-        $.ajax({
-            url: '/register/',
-            type: 'POST',
-			headers: {
-				'X-CSRFToken': csrftoken
-			},
-            data: {
-                'tel': tel,
-                'pwd': pwd
-            },
-			success: (ret) => {if (ret=='success') window.location='/';else $('html').html(ret);}
-		})
+	function vistr(value, len) {
+        return value.length >0 && value.length <= len && !/[\ '"]/.test(value);
+    }
+
+	function vinum(value, len) {
+		return value.length >0 && value.length <= len && /^[0-9]+$/.test(value);
 	}
+
+	function err(message) {
+		$('.ui.error.message').html(message);
+	}
+
+	if (!vinum(aid, 20)) {
+		err("不合法的卡号");
+	}
+	else if (!vistr(pname, 20)) {
+		err("不合法的姓名");
+	}
+	else if (!vinum(pid, 18) || pid.length != 18) {
+		err("不合法的证件号");
+	}
+	else if (psex != 'M' && psex != 'm' && psex != 'f' && psex != 'F') {
+		err("请输入正确性别");
+	}
+	else if (!vinum(tel, 11) || tel.length != 11) {
+		err("不合法的手机号");
+	}
+	else if (!vistr(pwd, 20)) {
+		err("不合法的密码");
+	}
+    else if (pwdCheck != pwd) {
+		err("两次密码不一致");
+	}
+	else {
+    // 发送 AJAX 请求到后端
+    $.ajax({
+        url: '/register/',
+        type: 'POST',
+        data: {
+            'aid': aid,
+            'pname': pname,
+            'pid': pid,
+            'pbirth': pbirth,
+            'psex': psex,
+            'tel': tel,
+            'pwd': pwd,
+        },
+        success: (ret) => {
+            if (ret === 'success') {
+                window.location = '/login/';
+            } else {
+                // 如果注册失败，将后端返回的内容显示在页面上
+                $('.ui.error.message').html(ret);
+            }
+        }
+    });
+}
+}
+
 </script>
